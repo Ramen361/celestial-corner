@@ -1,3 +1,8 @@
+/* =================================
+   Celestial Cafe — Full Theme CSS
+================================= */
+
+/* ---------- Color Palette ---------- */
 :root {
     --blue-lightest: #a7d4ff;
     --blue-light: #96bee5;
@@ -8,30 +13,62 @@
     --blue-darker: #425466;
     --blue-deep: #323f4c;
     --blue-night: #212a33;
+    --blue-void: #101519;
     --black: #000000;
     --white: #ffffff;
+
     --accent: #afd8ff;
     --fade1: #b8dcff;
     --fade2: #c1e0ff;
     --fade3: #cae5ff;
+
+    --glow: rgba(175, 216, 255, 0.6);
 }
 
+/* ---------- Reset ---------- */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* ---------- Body ---------- */
 body {
     font-family: 'Arial', sans-serif;
-    background-color: var(--blue-night);
+    background:
+        radial-gradient(circle at top, var(--blue-lightest), transparent 60%),
+        linear-gradient(
+            180deg,
+            var(--blue-midlight),
+            var(--blue-medium),
+            var(--blue-deep),
+            var(--blue-night),
+            var(--blue-void),
+            var(--black)
+        );
     color: var(--white);
-    line-height: 1.6;
+    line-height: 1.7;
+    min-height: 100vh;
 }
 
+/* ---------- Decorative Stars ---------- */
+body::before {
+    content: "✦ ✧ ✦ ✧ ✦";
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    font-size: 1.2rem;
+    color: var(--fade2);
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* ---------- Header ---------- */
 header {
-    background-color: var(--blue-mid);
-    padding: 1rem 2rem;
+    background: linear-gradient(90deg, var(--blue-midlight), var(--blue-mid));
+    padding: 1.2rem 2rem;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+    border-bottom: 1px solid var(--fade1);
 }
 
 nav {
@@ -40,125 +77,171 @@ nav {
     align-items: center;
 }
 
-nav .logo {
+.logo {
+    font-size: 1.9rem;
     font-weight: bold;
-    font-size: 1.8rem;
-    color: var(--white);
+    color: var(--accent);
+    text-shadow: 0 0 10px var(--glow);
 }
 
+/* ---------- Navigation ---------- */
 .nav-links {
     list-style: none;
     display: flex;
     gap: 1.5rem;
 }
 
-.nav-links li a {
+.nav-links a {
     color: var(--white);
     text-decoration: none;
-    font-weight: 500;
-    transition: color 0.3s;
+    position: relative;
 }
 
-.nav-links li a:hover {
-    color: var(--accent);
+.nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0%;
+    height: 2px;
+    background: var(--accent);
+    transition: width 0.3s ease;
 }
 
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+/* ---------- Hero ---------- */
 .hero {
     text-align: center;
     padding: 6rem 2rem;
-    background: linear-gradient(135deg, var(--blue-midlight), var(--blue-mid));
-    color: var(--white);
+    margin: 3rem auto;
+    max-width: 1100px;
+    background:
+        radial-gradient(circle at top, var(--fade3), transparent 70%),
+        linear-gradient(135deg, var(--blue-light), var(--blue-mid));
+    border-radius: 20px;
+    box-shadow: 0 0 40px rgba(175,216,255,0.25);
 }
 
 .hero h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
+    font-size: 3.2rem;
+    color: var(--accent);
+    text-shadow: 0 0 15px var(--glow);
 }
 
 .hero p {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
+    color: var(--fade2);
+    margin-top: 1rem;
 }
 
-.about-preview {
+/* ---------- Section Wrapper ---------- */
+section {
+    padding: 5rem 2rem;
+    position: relative;
+}
+
+/* Cute divider */
+section::before {
+    content: "⋆｡°✩";
+    display: block;
     text-align: center;
-    padding: 4rem 2rem;
-    background: var(--blue-light);
-    color: var(--black);
+    font-size: 1.3rem;
+    color: var(--fade1);
+    margin-bottom: 2rem;
+    opacity: 0.7;
 }
 
-.about-preview h2 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
+/* ---------- Card Style Sections ---------- */
+.about-preview,
+.about-section,
+.projects-section,
+.contact-section {
+    max-width: 950px;
+    margin: 3rem auto;
+    padding: 3.5rem 3rem;
+    background: linear-gradient(
+        180deg,
+        var(--blue-light),
+        var(--blue-dark),
+        var(--blue-deep)
+    );
+    border-radius: 18px;
+    box-shadow: 0 10px 35px rgba(0,0,0,0.4);
+    border: 1px solid rgba(255,255,255,0.1);
 }
 
-.about-preview p {
-    font-size: 1.1rem;
-    margin-bottom: 1rem;
+/* ---------- Headings ---------- */
+section h2 {
+    text-align: center;
+    font-size: 2.4rem;
+    margin-bottom: 2rem;
+    color: var(--accent);
+    text-shadow: 0 0 10px var(--glow);
 }
 
-.btn {
+/* ---------- Paragraphs ---------- */
+section p {
+    color: var(--fade2);
+    margin-bottom: 1.4rem;
+}
+
+/* ---------- Buttons ---------- */
+.btn,
+.btn-secondary {
     display: inline-block;
-    padding: 0.6rem 1.2rem;
-    background-color: var(--blue-dark);
-    color: var(--white);
+    padding: 0.7rem 1.4rem;
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--blue-dark), var(--blue-darker));
+    color: var(--accent);
     text-decoration: none;
-    border-radius: 6px;
     font-weight: 500;
-    transition: all 0.3s;
+    box-shadow: 0 0 12px rgba(175,216,255,0.35);
+    transition: all 0.3s ease;
 }
 
-.btn:hover {
-    background-color: var(--accent);
+.btn:hover,
+.btn-secondary:hover {
+    background: var(--accent);
     color: var(--blue-deep);
+    box-shadow: 0 0 20px var(--glow);
 }
 
+/* ---------- Music Grid ---------- */
+.music-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
 
+.music-grid iframe {
+    border-radius: 16px;
+    box-shadow: 0 6px 25px rgba(0,0,0,0.4);
+}
+
+/* ---------- Footer ---------- */
 footer {
     text-align: center;
-    padding: 2rem 0;
-    background-color: var(--blue-mid);
+    padding: 2.5rem 1rem;
+    background: linear-gradient(90deg, var(--blue-mid), var(--blue-dark));
+    border-top: 1px solid var(--fade1);
+    margin-top: 5rem;
 }
 
 footer a {
     color: var(--accent);
     text-decoration: none;
-    margin: 0 0.5rem;
 }
 
 footer a:hover {
     text-decoration: underline;
 }
 
-
-section {
-    padding: 4rem 2rem;
-}
-
-section:nth-child(even) {
-    background-color: var(--blue-deep);
-    color: var(--white);
-}
-
-section:nth-child(odd) {
-    background-color: var(--blue-medium);
-    color: var(--white);
-}
-
-a.btn-secondary {
-    background-color: var(--blue-darker);
-    color: var(--accent);
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-    text-decoration: none;
-}
-
-a.btn-secondary:hover {
-    background-color: var(--fade1);
-    color: var(--blue-deep);
-}
-
-
-@media(max-width: 768px) {
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
     .nav-links {
         flex-direction: column;
         gap: 0.8rem;
@@ -166,23 +249,6 @@ a.btn-secondary:hover {
     }
 
     .hero h1 {
-        font-size: 2.2rem;
+        font-size: 2.3rem;
     }
-
-    .hero p {
-        font-size: 1rem;
-    }
-}
-
-.music-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
-    margin-top: 2rem;
-    justify-items: center;
-}
-
-.music-grid iframe {
-    border-radius: 12px;
-    border: none;
 }
